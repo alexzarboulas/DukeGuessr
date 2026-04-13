@@ -33,12 +33,11 @@ The weights are too large for GitHub (CLIP: 577 MB, ViT: 327 MB) and are hosted 
 Download the two required files into the `models/` folder:
 
 ```bash
-curl -L <CLIP_WEIGHTS_URL> -o models/clip_base_best.pth
-curl -L <VIT_WEIGHTS_URL>  -o models/vit_base_best.pth
+curl -L https://github.com/alexzarboulas/DukeGuessr/releases/download/v1.0/clip_base_best.pth -o models/clip_base_best.pth
+curl -L https://github.com/alexzarboulas/DukeGuessr/releases/download/v1.0/vit_base_best.pth  -o models/vit_base_best.pth
 ```
 
-> `<CLIP_WEIGHTS_URL>` and `<VIT_WEIGHTS_URL>` are the asset download links from the [latest GitHub Release](<RELEASE_PAGE_URL>).
-> All three placeholders will be filled in once the release is published.
+> Full release page: https://github.com/alexzarboulas/DukeGuessr/releases/tag/v1.0
 
 ---
 
