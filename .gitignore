@@ -1,0 +1,28 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.local
+
+# Model weights (too large for GitHub — see SETUP.md for download instructions)
+models/*.pth
+
+# Raw image data (not redistributed — see ATTRIBUTION.md)
+data/raw/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# Misc
+*.log

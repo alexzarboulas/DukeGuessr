@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --duke-navy:  #003087;
+  --duke-royal: #0736a4;
+  --duke-light: #00a3e0;
+  --bg:         #0a0f1e;
+  --surface:    #111827;
+  --surface2:   #1a2640;
+  --border:     rgba(0, 163, 224, 0.25);
+  --glow:       rgba(0, 163, 224, 0.4);
+  --text:       #ffffff;
+  --muted:      rgba(255, 255, 255, 0.5);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  /* Layered background: two soft Duke-navy glows + dot grid + base color */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 0%,   rgba(0, 48, 135, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 100%, rgba(0, 48, 135, 0.15) 0%, transparent 55%),
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.018) 1px, transparent 0);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 12px var(--glow), inset 0 0 12px rgba(0,163,224,0.05); }
+  50%       { box-shadow: 0 0 28px rgba(0,163,224,0.7), inset 0 0 20px rgba(0,163,224,0.1); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Scale-up reveal for the predicted landmark name */
+@keyframes revealName {
+  from { opacity: 0; transform: scale(0.92) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+.landmark-name {
+  animation: revealName 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Layout helpers ──────────────────────────────────────────────────────── */
+
+/* Header clips the Gothic arch SVG */
+.page-header {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main content area */
+.page-main {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────────── */
+
+/* Horizontal scroll instead of wrapping — no ugly second row on mobile */
+.tab-bar {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px; /* room for box-shadow glow */
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+/* Each tab stays its natural width */
+.tab-btn {
+  flex: 0 0 auto;
+  min-width: 108px;
+}
+
+/* ── Confidence bars ─────────────────────────────────────────────────────── */
+
+.bar-label {
+  width: 158px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+/* ── Mobile overrides (≤ 600px) ──────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .page-main {
+    padding: 1.25rem 1rem 2.5rem;
+    gap: 1.1rem;
+  }
+
+  .bar-label {
+    width: 100px;
+    font-size: 0.7rem;
+  }
+
+  .model-desc-para {
+    font-size: 0.72rem !important;
+    line-height: 1.6 !important;
+  }
+}
