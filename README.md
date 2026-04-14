@@ -27,11 +27,11 @@ Perkins Library · Main Quad · Duke Chapel · Campus Dr / Bus Stop · Sarah P. 
 
 **Three architectures compared side-by-side in the app:**
 
-| Model | Training | Purpose |
-|-------|----------|---------|
-| Zero-Shot CLIP | None | Baseline, no training required |
-| Fine-Tuned CLIP | Contrastive (image encoder) | Primary model |
-| Fine-Tuned ViT-B/16 | CrossEntropyLoss | Architecture comparison |
+| Model | Architecture | Fine-Tuned | Training Objective | Text Anchors | Test Accuracy |
+|-------|-------------|:----------:|-------------------|:------------:|:-------------:|
+| Zero-Shot CLIP | ViT-B/32 | No | None (pretrained weights only) | 7 landmark paragraphs | 32.1% |
+| Fine-Tuned CLIP | ViT-B/32 | Yes (image encoder) | Cosine similarity vs. frozen text anchors, cross-entropy | 7 landmark paragraphs | 100.0% |
+| Fine-Tuned ViT-B/16 | ViT-B/16 | Yes (full model) | CrossEntropyLoss over integer class labels | None | 100.0% |
 
 ### Attention Brightness Map
 
