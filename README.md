@@ -8,6 +8,17 @@ Upload a photo taken on Duke's campus and DukeGuessr will match it against rich 
 
 ---
 
+## Real-World Motivation
+
+- **Campus navigation:** new students and visitors can identify where a photo was taken
+- **Historical photo archiving:** locate undated archive photos by visual content alone
+- **Accessibility:** describe a location from a photo for users who cannot read a map
+- **Social media geotagging:** automatically suggest the correct Duke location tag
+
+This project builds on CLIP (Radford et al., 2021) and connects to the visual place recognition (VPR) research area, including systems like NetVLAD and GeoGuessr-style localization.
+
+---
+
 ## What It Does
 
 Instead of numeric class labels, the primary model uses **natural language paragraphs** as class anchors. CLIP learns to match what it *sees* in a photo with what it *reads* about a landmark. The best-matching description determines the prediction.
@@ -100,7 +111,7 @@ Per-class precision/recall/F1 and training curves: `notebooks/experiments.ipynb`
 
 4. **CLIP and ViT are architecturally complementary.** Both reach 100% accuracy, but ViT requires retraining to add a new class while CLIP only needs a new text description. For a landmark classifier that might expand to new buildings, CLIP's language-grounded approach scales more naturally.
 
-5. **350 images is sufficient for this task.** With a pretrained backbone and appropriate fine-tuning, 245 training images (70%) was enough for perfect generalization across 7 classes. The bottleneck is the backbone quality, not the dataset size.
+5. **350 images is sufficient for a well-constrained classification task.** With a pretrained backbone and appropriate fine-tuning, 245 training images (70%) was enough for perfect generalization across 7 classes. The bottleneck is backbone quality, not dataset size.
 
 ---
 
@@ -118,14 +129,3 @@ Per-class precision/recall/F1 and training curves: `notebooks/experiments.ipynb`
 
 - **Demo video (3–5 min):** [link TBD]
 - **Technical walkthrough (5–10 min):** [link TBD]
-
----
-
-## Real-World Motivation
-
-- **Campus navigation:** new students and visitors can identify where a photo was taken
-- **Historical photo archiving:** locate undated archive photos by visual content alone
-- **Accessibility:** describe a location from a photo for users who cannot read a map
-- **Social media geotagging:** automatically suggest the correct Duke location tag
-
-This project builds on CLIP (Radford et al., 2021) and connects to the visual place recognition (VPR) research area, including systems like NetVLAD and GeoGuessr-style localization.
