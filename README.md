@@ -12,7 +12,6 @@ Upload a photo taken on Duke's campus and DukeGuessr will match it against rich 
 
 - **Campus navigation:** new students and visitors can identify where a photo was taken
 - **Historical photo archiving:** locate undated archive photos by visual content alone
-- **Accessibility:** describe a location from a photo for users who cannot read a map
 - **Social media geotagging:** automatically suggest the correct Duke location tag
 
 This project builds on CLIP (Radford et al., 2021) and connects to the visual place recognition (VPR) research area, including systems like NetVLAD and GeoGuessr-style localization.
@@ -109,9 +108,7 @@ Per-class precision/recall/F1 and training curves: `notebooks/experiments.ipynb`
 
 3. **Short text anchors outperform rich descriptions in zero-shot use.** The 77-token CLIP limit is a real architectural constraint. Concise labels are more reliable than long paragraphs that get truncated. Once fine-tuned, this distinction disappears.
 
-4. **CLIP and ViT are architecturally complementary.** Both reach 100% accuracy, but ViT requires retraining to add a new class while CLIP only needs a new text description. For a landmark classifier that might expand to new buildings, CLIP's language-grounded approach scales more naturally.
-
-5. **350 images is sufficient for a well-constrained classification task.** With a pretrained backbone and appropriate fine-tuning, 245 training images (70%) was enough for perfect generalization across 7 classes. The bottleneck is backbone quality, not dataset size.
+4. **350 images is sufficient for a well-constrained classification task.** With a pretrained backbone and appropriate fine-tuning, 245 training images (70%) was enough for perfect generalization across 7 classes. The bottleneck is backbone quality, not dataset size.
 
 ---
 
@@ -119,7 +116,6 @@ Per-class precision/recall/F1 and training curves: `notebooks/experiments.ipynb`
 
 - **More landmarks:** the current 7 classes cover only a fraction of Duke's campus. Expanding to 20-30 landmarks with ~50 images each would stress-test both models.
 - **Harder negatives in "Other":** the current "other" class is generic campus scenes. Adding near-miss images (similar lighting, similar architecture from off-campus) would test the confidence threshold more rigorously.
-- **Larger CLIP variants:** ViT-L/14 has a 768-d embedding space vs. ViT-B/32's 512-d. Preliminary evidence from the CLIP paper suggests substantial accuracy gains on fine-grained visual tasks.
 - **Public deployment:** hosting the backend on a GPU endpoint (e.g., Modal, Replicate) and the frontend on Vercel would make the demo accessible without local setup.
 - **Seasonal robustness:** all photos were taken in April 2026. Testing on photos from other seasons (fall foliage, winter snow) would reveal how much the model depends on color and lighting conditions specific to spring.
 

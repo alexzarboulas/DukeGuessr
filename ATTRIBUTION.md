@@ -2,7 +2,7 @@
 
 ## Dataset
 
-All 350 landmark photos were **collected originally** by Alexander Zarboulas using a personal camera during dedicated on-campus photography sessions at Duke University in April 2026. No third-party images were used. Photos are not redistributed in this repository.
+All 350 landmark photos were **collected originally** by Alexander Zarboulas using a personal camera during dedicated photography sessions at Duke University in April 2026. No third-party images were used. Photos are not shown in this repository.
 
 **7 classes collected:** Perkins Library, Main Quad, Duke Chapel, Campus Dr / Bus Stop, Sarah P. Duke Gardens, Wannamaker Benches, Other. ~50 images per class.
 
@@ -10,22 +10,22 @@ All 350 landmark photos were **collected originally** by Alexander Zarboulas usi
 
 ## AI Development Tools
 
-AI tools (Claude Code, Anthropic) were used throughout this project for code scaffolding, debugging, and frontend design. Here is a substantive account of what was generated, what was modified, and what required manual work:
+AI tools (Claude Code, Anthropic) were used throughout this project for code scaffolding, debugging, and frontend design. The following files were scaffolded or drafted with AI assistance:
 
-| Area | What AI generated | What I wrote / debugged / decided |
-|------|-------------------|-----------------------------------|
-| `src/data.py` | Initial dataset class, transform pipeline, split logic | Normalization stat choices (CLIP vs ImageNet), augmentation technique selection, stratification parameters |
-| `src/clip_model.py` | CLIP loading wrappers, text encoding, logit computation | Decision to freeze text encoder, which layers to freeze, 77-token truncation workaround strategy |
-| `src/train_clip.py` | Training loop structure, early stopping class | All hyperparameter choices (lr=1e-5, patience=5, weight_decay=1e-4), experiment design decisions |
-| `src/train_vit.py` | ViT training loop | Hyperparameter choices (lr=1e-4), decision to use ImageNet normalization |
-| `src/evaluate.py` | Evaluation pipeline structure, per-class metrics output | Analysis write-up, evaluation metric selection, conclusions drawn from results |
-| `src/predict.py` | Single-image inference, GPS lookup, brightness map generation | Confidence threshold choice (0.30), decision to expose all 3 models in one response, attention visualization design (forward hook on last ViT block, CLS-to-patch attention, gamma=0.6, brightness-modulated output instead of false-color heatmap) |
-| `src/app.py` | Flask routes, model loading, base64 transport of brightness map | Multi-model architecture decision, port 5001 workaround for macOS AirPlay conflict, decision to run all three models per request |
-| `frontend/src/App.jsx` | Full UI including dark Duke theme, tab switcher, animated confidence bars, attention brightness map display | Design direction (dark/dramatic), content of landmark facts, model description text, all visual style decisions, decision to show brightness map instead of uploaded image preview |
-| `data/descriptions/landmarks.json` | Draft paragraph descriptions for each landmark | All editing and refinement of visual descriptions to front-load distinctive features within CLIP's 77-token limit |
-| `SETUP.md`, `README.md` | Document templates and structure | All accuracy numbers, experiment results, real-world framing, video links |
+| File | AI contribution |
+|------|----------------|
+| `src/data.py` | Dataset class, transform pipeline, split logic |
+| `src/clip_model.py` | CLIP loading wrappers, text encoding, logit computation |
+| `src/train_clip.py` | Training loop structure, early stopping class |
+| `src/train_vit.py` | ViT training loop |
+| `src/evaluate.py` | Evaluation pipeline structure, per-class metrics output |
+| `src/predict.py` | Single-image inference, GPS lookup, brightness map generation |
+| `src/app.py` | Flask routes, model loading, base64 transport of brightness map |
+| `frontend/src/App.jsx` | Full UI including dark Duke theme, tab switcher, animated confidence bars, attention brightness map display |
+| `data/descriptions/landmarks.json` | Draft paragraph descriptions for each landmark |
+| `SETUP.md`, `README.md` | Document templates and structure |
 
-**What AI did not do:** The experiment design (which ablations to run, which architectures to compare), all training runs (executed on Google Colab T4 GPU), the iteration log, the data collection, and the analysis conclusions are entirely Alexander Zarboulas's original work.
+**What AI was not responsible for:** The experiment design, choice of architectures, all training runs (executed on Google Colab T4 GPU), hyperparameter decisions, ablation design, the attention visualization concept and implementation strategy, the data collection, and all analysis and conclusions are entirely Alexander Zarboulas's original work. AI generated code on request — it did not direct the project, choose what to build, or determine what the results mean.
 
 ---
 
