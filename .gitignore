@@ -26,3 +26,7 @@ notebooks/.ipynb_checkpoints/
 
 # Misc
 *.log
+
+# Local video scripts (not for repo)
+demo_script.txt
+walkthrough_script.txt
