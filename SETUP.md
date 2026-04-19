@@ -10,68 +10,35 @@
 ## 1. Clone the repo
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/alexzarboulas/DukeGuessr.git
 cd DukeGuessr
 ```
 
 ---
 
-## 2. Install Python dependencies
+## 2. One-time setup
 
 ```bash
-python -m venv venv
-source venv/bin/activate       # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-pip install git+https://github.com/openai/CLIP.git
+bash setup.sh
 ```
+
+This installs Python dependencies, the CLIP library, frontend packages, and downloads both model weight files (~900 MB total). It only needs to be run once.
 
 ---
 
-## 3. Download model weights
-
-The weights are too large for GitHub (CLIP: 577 MB, ViT: 327 MB) and are hosted as GitHub Release assets.
-Download the two required files into the `models/` folder:
+## 3. Start the app
 
 ```bash
-curl -L https://github.com/alexzarboulas/DukeGuessr/releases/download/v1.0/clip_base_best.pth -o models/clip_base_best.pth
-curl -L https://github.com/alexzarboulas/DukeGuessr/releases/download/v1.0/vit_base_best.pth  -o models/vit_base_best.pth
+bash start.sh
 ```
 
-> Full release page: https://github.com/alexzarboulas/DukeGuessr/releases/tag/v1.0
+Both the backend and frontend start in the same terminal. Open the URL printed in the terminal (typically http://localhost:3000). Press **Ctrl+C** to stop both servers.
 
 ---
 
-## 4. Start the backend
+## macOS note
 
-```bash
-# From project root, with venv active
-python src/app.py \
-  --clip_weights models/clip_base_best.pth \
-  --vit_weights  models/vit_base_best.pth \
-  --descriptions data/descriptions/landmarks.json \
-  --port 5001
-```
-
-> **macOS:** AirPlay occupies port 5000 — use `--port 5001` (already the default above).
-
----
-
-## 5. Start the frontend
-
-In a separate terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Create `frontend/.env.local` with:
-```
-VITE_API_URL=http://localhost:5001
-```
-
-Then open the URL shown in the terminal (typically http://localhost:3000).
+AirPlay occupies port 5000. The backend defaults to port 5001 — no action needed.
 
 ---
 
@@ -79,8 +46,7 @@ Then open the URL shown in the terminal (typically http://localhost:3000).
 
 | Problem | Fix |
 |---------|-----|
-| `ModuleNotFoundError: clip` | Run `pip install git+https://github.com/openai/CLIP.git` |
-| SSL error downloading CLIP base weights | `curl -L https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt -o ~/.cache/clip/ViT-B-32.pt` |
-| Port 5000 returns 403 on macOS | AirPlay is on 5000 — use `--port 5001` |
-| CORS error in browser | Check that `VITE_API_URL` in `frontend/.env.local` matches the Flask port |
-| Vite not on port 3000 | Vite auto-increments if 3000 is taken — check terminal output for actual URL |
+| `ModuleNotFoundError: clip` | Run `bash setup.sh` again — the CLIP install may have failed |
+| SSL error downloading CLIP weights | `curl -L https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt -o ~/.cache/clip/ViT-B-32.pt` |
+| Frontend not on port 3000 | Vite auto-increments if 3000 is taken — check the terminal output for the actual URL |
+| `venv/bin/activate: No such file` | Run `bash setup.sh` first to create the virtual environment |
