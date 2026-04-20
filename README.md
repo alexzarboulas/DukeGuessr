@@ -116,4 +116,4 @@ Per-class precision/recall/F1 and training curves: `notebooks/experiments.ipynb`
 ## Video Links
 
 - **Demo video:** https://youtu.be/xsF8X-D7FRY
-- **Technical walkthrough (5–10 min):** [link TBD]
+- **Technical walkthrough:** https://youtu.be/4BVEuawNONc
