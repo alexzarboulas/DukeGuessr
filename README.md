@@ -20,7 +20,7 @@ This project builds on CLIP (Radford et al., 2021) and connects to the visual pl
 
 ## What It Does
 
-Instead of numeric class labels, the primary model uses **natural language paragraphs** as class anchors. CLIP learns to match what it *sees* in a photo with what it *reads* about a landmark. The best-matching description determines the prediction.
+DukeGuessr is a web application that identifies Duke University landmarks from uploaded photos using three machine learning models running in parallel: a fine-tuned CLIP model (the primary model), a zero-shot CLIP baseline, and a fine-tuned ViT-B/16 for architecture comparison. Instead of numeric class labels, the CLIP-based models use natural language paragraphs as class anchors — CLIP learns to match what it *sees* in a photo with what it *reads* about a landmark, and the best-matching description determines the prediction. For every upload, the app also generates an attention brightness map showing which parts of the image most influenced the fine-tuned CLIP model's decision.
 
 **7 classes:**
 Perkins Library · Main Quad · Duke Chapel · Campus Dr / Bus Stop · Sarah P. Duke Gardens · Wannamaker Benches · Other
