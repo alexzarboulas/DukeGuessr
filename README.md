@@ -43,24 +43,16 @@ This reveals *where* the model looked when making its prediction, at zero extra 
 
 ## Quick Start
 
-See **[SETUP.md](SETUP.md)** for full installation instructions.
-
 ```bash
-# Backend (run from project root)
-pip install -r requirements.txt
-pip install git+https://github.com/openai/CLIP.git
-python src/app.py \
-  --clip_weights models/clip_base_best.pth \
-  --vit_weights  models/vit_base_best.pth \
-  --descriptions data/descriptions/landmarks.json \
-  --port 5001
-
-# Frontend (separate terminal)
-cd frontend && npm install && npm run dev
-# → open http://localhost:3000
+git clone https://github.com/alexzarboulas/DukeGuessr.git
+cd DukeGuessr
+bash setup.sh   # one-time: installs dependencies and downloads model weights
+bash start.sh   # starts backend and frontend in one terminal
 ```
 
-> **Note for macOS users:** macOS AirPlay occupies port 5000. Use `--port 5001` and set `VITE_API_URL=http://localhost:5001` in `frontend/.env.local`.
+Open the URL printed in the terminal (typically http://localhost:3000).
+
+See **[SETUP.md](SETUP.md)** for full installation details and troubleshooting.
 
 ---
 
